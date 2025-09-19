@@ -12,7 +12,7 @@ Simple and efficient MCP (Model Context Protocol) server for Jira integration. A
 - **Search issues** - use JQL (Jira Query Language) for flexible searching
 - **Detailed issue information** - complete information about a specific issue with comments
 - **Project listing** - view all available projects
-- **Russian localization** - all responses in Russian with emojis for better readability
+- **User-friendly output** - all responses with emojis and clear formatting for better readability
 
 ## 📋 Available Tools
 
@@ -263,7 +263,7 @@ If you encounter problems or have questions:
 - Initial release
 - Basic functions for working with issues and projects
 - JQL search support
-- Russian interface localization
+- English interface with user-friendly formatting
 
 ## 📚 Useful Links
 
