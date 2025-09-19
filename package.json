@@ -1,0 +1,12 @@
+{
+  "name": "jira-simple-mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "jira-mcp-simple.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "bin": {
+    "jira-simple-mcp": "./jira-mcp-simple.js"
+  }
+}
