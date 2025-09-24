@@ -2,19 +2,49 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import "dotenv/config";
 
 const JIRA_URL = process.env.JIRA_URL;
 const JIRA_EMAIL = process.env.JIRA_EMAIL;
 const JIRA_API_TOKEN = process.env.JIRA_API_TOKEN;
 
 if (!JIRA_URL || !JIRA_EMAIL || !JIRA_API_TOKEN) {
-  console.error(
-    "❌ Authentication Error: Jira authentication required. Set JIRA_URL, JIRA_EMAIL, and JIRA_API_TOKEN environment variables."
-  );
+  console.error("❌ Authentication Error: Jira authentication required.");
+  console.error("📝 Please create a .env file based on .env.example");
+  console.error("   or set the following environment variables:");
+  console.error("   - JIRA_URL");
+  console.error("   - JIRA_EMAIL");
+  console.error("   - JIRA_API_TOKEN");
   process.exit(1);
 }
 
 const server = new Server({ name: "jira-simple-mcp", version: "1.0.0" }, { capabilities: { tools: {} } });
+
+function extractTextFromADF(adfContent) {
+  if (!adfContent) return "No description";
+
+  if (typeof adfContent === "string") {
+    return adfContent;
+  }
+
+  if (typeof adfContent === "object" && adfContent.content) {
+    function extractText(node) {
+      if (node.type === "text") {
+        return node.text || "";
+      }
+
+      if (node.content && Array.isArray(node.content)) {
+        return node.content.map(extractText).join("");
+      }
+
+      return "";
+    }
+
+    return extractText(adfContent).trim() || "No description";
+  }
+
+  return "No description";
+}
 
 async function callJiraAPI(endpoint, method = "GET", body = null) {
   const url = `${JIRA_URL}/rest/api/3${endpoint}`;
@@ -128,6 +158,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           reporter: issue.fields.reporter?.displayName || "Unknown",
           created: issue.fields.created,
           updated: issue.fields.updated,
+          description: extractTextFromADF(issue.fields.description),
           url: `${JIRA_URL}/browse/${issue.key}`
         }));
 
@@ -167,6 +198,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           reporter: issue.fields.reporter?.displayName || "Unknown",
           created: issue.fields.created,
           updated: issue.fields.updated,
+          description: extractTextFromADF(issue.fields.description),
           url: `${JIRA_URL}/browse/${issue.key}`
         }));
 
@@ -243,12 +275,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           reporter: result.fields.reporter?.displayName || "Unknown",
           created: result.fields.created,
           updated: result.fields.updated,
-          description: result.fields.description || "No description",
+          description: extractTextFromADF(result.fields.description),
           url: `${JIRA_URL}/browse/${result.key}`,
           comments:
             result.fields.comment?.comments?.map((comment) => ({
               author: comment.author.displayName,
-              body: comment.body,
+              body: extractTextFromADF(comment.body),
               created: comment.created
             })) || []
         };
